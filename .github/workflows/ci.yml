@@ -448,8 +448,13 @@ jobs:
       labels: ${{ matrix.labels }}
     strategy:
       matrix:
-        os: [linux, macos, windows]
-        labels: [[self-hosted, Linux, ARM64, mac-server], [self-hosted, macOS, ARM64, mac-server], [self-hosted, Windows, ARM64, mac-server]]
+        include:
+          - os: linux
+            labels: [self-hosted, Linux, ARM64, mac-server]
+          - os: macos
+            labels: [self-hosted, macOS, ARM64, mac-server]
+          - os: windows
+            labels: [self-hosted, Windows, ARM64, mac-server]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
